@@ -4037,8 +4037,9 @@ body.gate-active #bottom-dock {
     padding: 0 0.75rem;
   }
   .nav-brand {
-    font-size: 1.05rem;
+    font-size: clamp(0.88rem, 3.6vw, 1.05rem);
     gap: 0.35rem;
+    white-space: nowrap;
   }
   .brand-potato-icon {
     font-size: 1.25rem;
