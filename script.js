@@ -54,8 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const bgVideo = document.getElementById('bg-video');
   const bgAudio = document.getElementById('bg-audio');
   const btnMusicToggle = document.getElementById('btn-music-toggle');
-  const btnFloatingMusicToggle = document.getElementById('btn-floating-music-toggle');
-  const floatingMusicBar = document.getElementById('floating-music-bar');
   const btnThemeToggle = document.getElementById('btn-theme-toggle');
   const btnSettingsToggle = document.getElementById('btn-settings-toggle');
   const customizerDrawer = document.getElementById('customizer-drawer');
@@ -250,41 +248,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (label) label.textContent = 'Play Music';
       }
     }
-
-    // 2. Floating Quick-Action Music Widget
-    const floatingBar = document.getElementById('floating-music-bar');
-    const floatingStatus = document.getElementById('floating-music-status-text');
-    const floatingBtnText = document.getElementById('floating-music-btn-text');
-    const floatingBtnIcon = document.getElementById('floating-music-btn-icon');
-    const floatingToggleBtn = document.getElementById('btn-floating-music-toggle');
-
-    if (floatingBar) {
-      if (state.isPlayingMusic) {
-        floatingBar.classList.add('is-playing');
-        floatingBar.classList.remove('is-stopped');
-        if (floatingStatus) floatingStatus.textContent = 'Playing';
-        if (floatingBtnText) floatingBtnText.textContent = 'Stop Music';
-        if (floatingBtnIcon) floatingBtnIcon.textContent = '⏹️';
-        if (floatingToggleBtn) {
-          floatingToggleBtn.title = 'Stop Music ⏹️';
-          floatingToggleBtn.setAttribute('aria-label', 'Stop Background Music');
-        }
-      } else {
-        floatingBar.classList.remove('is-playing');
-        floatingBar.classList.add('is-stopped');
-        if (floatingStatus) floatingStatus.textContent = 'Paused';
-        if (floatingBtnText) floatingBtnText.textContent = 'Play Music';
-        if (floatingBtnIcon) floatingBtnIcon.textContent = '▶️';
-        if (floatingToggleBtn) {
-          floatingToggleBtn.title = 'Play Music ▶️';
-          floatingToggleBtn.setAttribute('aria-label', 'Play Background Music');
-        }
-      }
-    }
   }
 
   // ------------------------------------------------------------------
-  // 3A. MUSIC TOGGLE CONTROLLERS (Top Nav & Floating Bar)
+  // 3A. MUSIC TOGGLE CONTROLLER (Top Navigation Bar)
   // ------------------------------------------------------------------
   if (btnMusicToggle) {
     btnMusicToggle.addEventListener('click', (e) => {
@@ -292,45 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleMusic();
     });
   }
-
-  const btnFmbDisc = document.getElementById('btn-fmb-disc');
-  const btnFmbCollapse = document.getElementById('btn-fmb-collapse');
-
-  if (btnFloatingMusicToggle) {
-    btnFloatingMusicToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMusic();
-    });
-  }
-
-  // Tapping the circular vinyl disc toggles expand / collapse
-  if (btnFmbDisc) {
-    btnFmbDisc.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (floatingMusicBar) {
-        floatingMusicBar.classList.toggle('is-collapsed');
-      }
-    });
-  }
-
-  // Tapping the collapse arrow button collapses the bar
-  if (btnFmbCollapse) {
-    btnFmbCollapse.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (floatingMusicBar) {
-        floatingMusicBar.classList.add('is-collapsed');
-      }
-    });
-  }
-
-  // Clicking anywhere outside the expanded floating bar collapses it
-  document.addEventListener('click', (e) => {
-    if (floatingMusicBar && !floatingMusicBar.classList.contains('is-collapsed')) {
-      if (!floatingMusicBar.contains(e.target)) {
-        floatingMusicBar.classList.add('is-collapsed');
-      }
-    }
-  });
 
   // Initial Music UI state update
   updateMusicUI();
