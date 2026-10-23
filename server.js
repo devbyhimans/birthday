@@ -16,6 +16,11 @@ app.use(express.json());
 // Serve static frontend files from current directory
 app.use(express.static(path.join(__dirname)));
 
+// Fallback direct routes to ensure birthday letter image is always served
+app.get(['/mesSAGE.jpeg', '/message.jpeg', '/mesSAGE.jpg', '/message.jpg', '/assets/message.jpeg', '/assets/message.jpg'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'assets', 'mesSAGE.jpeg'));
+});
+
 // MongoDB Connection Pool
 let dbClient = null;
 let db = null;

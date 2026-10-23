@@ -14,8 +14,12 @@
   <!-- Canvas Confetti Library via CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
+  <!-- Preload critical images -->
+  <link rel="preload" as="image" href="assets/mesSAGE.jpeg">
+  <link rel="preload" as="image" href="assets/chamomile_card.png">
+
   <!-- External Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=v9_clean_top_music_bar">
+  <link rel="stylesheet" href="style.css?v=v10_step6_letter_fix">
 </head>
 <body class="gate-active">
 
@@ -42,12 +46,6 @@
     <!-- Soft water ripple canvas for interactive lake ripples -->
     <canvas id="lake-ripples-canvas"></canvas>
 
-    <!-- Optional looping background video with soft pink overlay & gradient fallback -->
-    <video id="bg-video" class="bg-video" autoplay loop muted playsinline style="display: none;">
-      <source src="assets/bg.mp4" type="video/mp4">
-      <source src="bg.mp4" type="video/mp4">
-    </video>
-
     <!-- Translucent water surface sheen overlay -->
     <div class="bg-overlay lake-overlay"></div>
   </div>
@@ -58,7 +56,6 @@
   <!-- Background Music Audio Element (Meena Bazaar - Keshav Tyohar) -->
   <audio id="bg-audio" loop preload="auto">
     <source src="assets/audio/Meena Bazaar - Keshav Tyohar Official Music Video.mp3" type="audio/mpeg">
-    <source src="assets/audio/song.mp3" type="audio/mpeg">
   </audio>
 
   <!-- ====================================================================
@@ -372,21 +369,84 @@
         <h2 class="journey-heading">Your Cutuu wants to tell you something 💌</h2>
         <p class="journey-subheading">A letter written straight from the heart...</p>
 
-        <!-- Scrollable Letter Image Container -->
-        <div class="message-scroll-wrapper">
-          <div class="message-scroll-hint">
-            <span>📜 Scroll to read full letter</span>
-            <span>👇</span>
+        <!-- View Mode Switcher: Handwritten Photo vs Clear Text -->
+        <div class="letter-tab-container">
+          <div class="letter-tab-row" role="tablist">
+            <button type="button" id="tab-btn-handwritten" class="letter-tab-btn active" role="tab" aria-selected="true">
+              <span>📜 Handwritten Letter</span>
+            </button>
+            <button type="button" id="tab-btn-text" class="letter-tab-btn" role="tab" aria-selected="false">
+              <span>💌 Read as Text</span>
+            </button>
           </div>
+        </div>
+
+        <!-- Mode 1: Scrollable Letter Image Container -->
+        <div class="message-scroll-wrapper" id="letter-view-handwritten">
+          <div class="message-action-row">
+            <div class="message-scroll-hint">
+              <span>📜 Scroll down to read full letter 👇</span>
+            </div>
+            <button type="button" id="btn-zoom-letter" class="btn-zoom-letter" title="View Fullscreen & Zoom 🔍">
+              <span>🔍 Tap to Zoom</span>
+            </button>
+          </div>
+
           <div class="message-image-scroll-box" id="message-scroll-box">
             <img 
               id="step6-message-img"
-              src="mesSAGE.jpeg" 
+              src="assets/mesSAGE.jpeg" 
               alt="Birthday letter for Potato" 
               class="message-scroll-img"
-              loading="lazy"
-              onerror="if(!this.dataset.fallbackTried){this.dataset.fallbackTried='1'; this.src='assets/mesSAGE.jpeg';}"
+              loading="eager"
+              decoding="async"
+              onerror="if(!this.dataset.fallbackTried){this.dataset.fallbackTried='1'; this.src='mesSAGE.jpeg';}"
             />
+          </div>
+        </div>
+
+        <!-- Mode 2: Beautiful Clean Formatted Romantic Text Container -->
+        <div id="letter-view-text" class="personal-message-body" style="display: none;">
+          <div class="letter-text-content">
+            <p class="letter-intro"><strong>There's this girl... 💖</strong></p>
+            
+            <p class="letter-stanza">
+              She has the colors of butterflies,<br>
+              the softness of a rose,<br>
+              the glow of a quiet sunset,<br>
+              and something the moon could never learn.
+            </p>
+
+            <p class="letter-stanza">
+              She's shorter than me, but she has the most gorgeous eyes,<br>
+              a beautiful smile, pretty hair, and a personality<br>
+              that makes her even more beautiful than she probably realizes. 💖
+            </p>
+
+            <p class="letter-stanza">
+              When I say you're beautiful, I don't just mean that you look good.<br>
+              I mean you're like the stars that fill an empty sky and make it whole,<br>
+              like water to a thirsty soul, like sunlight finding its way into the darkest corners. You have a kind of beauty that doesn't come from the world, yet somehow makes the world feel more beautiful just by being in it. ✨
+            </p>
+
+            <p class="letter-stanza">
+              Sometimes, it feels like the world borrowed a little of its beauty from you and forgot to take it back. And maybe that's why words never seem enough when I try to describe you. How do I put into words the way your eyes shine, the way your smile makes everything feel lighter, or how even the smallest things about you become something worth remembering? 🌸
+            </p>
+
+            <p class="letter-stanza">
+              And the funny thing is, you might be reading this right now, not even realizing that every word is about you. You might see yourself as just another girl in this world, but to me, there's something about you that makes you impossible to mistake for anyone else. 💖
+            </p>
+
+            <p class="letter-stanza">
+              So when I tell you that you're beautiful, please know I mean so much more than your appearance. I mean the way you exist, the person you are, and the little things that make you you. It's the kind of beauty that words can only try to explain, the kind that the moon could look at a thousand times and still never learn to create. 🌙✨
+            </p>
+
+            <p class="letter-stanza">
+              And if I ever fail to describe just how beautiful you are,<br>
+              it's only because some things are too beautiful to fit into words. 💖
+            </p>
+
+            <p class="letter-signoff">— Written straight from the heart for you, my lovely Potato 💖💛</p>
           </div>
         </div>
 
@@ -640,8 +700,20 @@
     </div>
   </div>
 
+  <!-- Lightbox Modal for Fullscreen Letter Zoom -->
+  <div id="letter-lightbox-modal" class="letter-lightbox-modal" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button type="button" id="btn-close-lightbox" class="btn-close-lightbox" aria-label="Close Fullscreen View">✕</button>
+      <div class="lightbox-img-wrapper">
+        <img id="lightbox-img" src="assets/mesSAGE.jpeg" alt="Full size letter for Potato">
+      </div>
+      <p class="lightbox-hint">Pinch or scroll to read every handwritten word ✨</p>
+    </div>
+  </div>
+
   <!-- Configuration and Logic Scripts -->
-  <script src="config.js?v=v4_journey"></script>
-  <script src="script.js?v=v4_journey"></script>
+  <script src="config.js?v=v10_step6_letter_fix"></script>
+  <script src="script.js?v=v10_step6_letter_fix"></script>
 </body>
 </html>

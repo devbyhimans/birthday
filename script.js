@@ -1142,13 +1142,83 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ------------------------------------------------------------------
-  // STEP 6: Message from me (Scrollable letter image)
+  // STEP 6: Message from me (Letter with Tabs & Fullscreen Zoom Lightbox)
   // ------------------------------------------------------------------
-  function renderPersonalMessage() {
-    const imgEl = document.getElementById('step6-message-img');
-    if (imgEl && config.journey?.step6?.image) {
-      imgEl.src = config.journey.step6.image;
+  const tabBtnHandwritten = document.getElementById('tab-btn-handwritten');
+  const tabBtnText = document.getElementById('tab-btn-text');
+  const letterViewHandwritten = document.getElementById('letter-view-handwritten');
+  const letterViewText = document.getElementById('letter-view-text');
+  const btnZoomLetter = document.getElementById('btn-zoom-letter');
+  const letterLightbox = document.getElementById('letter-lightbox-modal');
+  const btnCloseLightbox = document.getElementById('btn-close-lightbox');
+  const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+  const step6Img = document.getElementById('step6-message-img');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  if (tabBtnHandwritten && tabBtnText && letterViewHandwritten && letterViewText) {
+    tabBtnHandwritten.addEventListener('click', () => {
+      tabBtnHandwritten.classList.add('active');
+      tabBtnHandwritten.setAttribute('aria-selected', 'true');
+      tabBtnText.classList.remove('active');
+      tabBtnText.setAttribute('aria-selected', 'false');
+      letterViewHandwritten.style.display = 'flex';
+      letterViewText.style.display = 'none';
+    });
+
+    tabBtnText.addEventListener('click', () => {
+      tabBtnText.classList.add('active');
+      tabBtnText.setAttribute('aria-selected', 'true');
+      tabBtnHandwritten.classList.remove('active');
+      tabBtnHandwritten.setAttribute('aria-selected', 'false');
+      letterViewHandwritten.style.display = 'none';
+      letterViewText.style.display = 'block';
+    });
+  }
+
+  function openLetterLightbox() {
+    if (letterLightbox) {
+      letterLightbox.classList.add('is-open');
+      letterLightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
     }
+  }
+
+  function closeLetterLightbox() {
+    if (letterLightbox) {
+      letterLightbox.classList.remove('is-open');
+      letterLightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (btnZoomLetter) btnZoomLetter.addEventListener('click', openLetterLightbox);
+  if (step6Img) {
+    step6Img.addEventListener('click', openLetterLightbox);
+    // Extra safety: ensure fallback if load ever fails
+    step6Img.addEventListener('error', () => {
+      if (!step6Img.dataset.triedFallback) {
+        step6Img.dataset.triedFallback = '1';
+        step6Img.src = 'mesSAGE.jpeg';
+      }
+    });
+  }
+  if (btnCloseLightbox) btnCloseLightbox.addEventListener('click', closeLetterLightbox);
+  if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLetterLightbox);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && letterLightbox && letterLightbox.classList.contains('is-open')) {
+      closeLetterLightbox();
+    }
+  });
+
+  function renderPersonalMessage() {
+    const targetSrc = (config.journey?.step6?.image) || 'assets/mesSAGE.jpeg';
+    if (step6Img) {
+      if (!step6Img.src || step6Img.src.endsWith('mesSAGE.jpeg') || step6Img.naturalWidth === 0) {
+        step6Img.src = targetSrc;
+      }
+    }
+    if (lightboxImg) lightboxImg.src = targetSrc;
   }
 
   // ------------------------------------------------------------------
