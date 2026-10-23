@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en" class="gate-active">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Happy 19th Birthday, Potato! 💖🎂✨</title>
+  <meta name="description" content="A warm, cute, emotional 19th birthday gift website made with love for Potato.">
+
+  <!-- Google Fonts: Fredoka (Headings/UI) & Caveat (Handwritten) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Canvas Confetti Library via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=v7_collapsible_music">
+</head>
+<body class="gate-active">
+
+  <!-- ====================================================================
+       RAINBOW COLOR WATER LAKE BACKGROUND (Dynamic Fluid Gradients & Waves)
+       ==================================================================== -->
+  <div class="bg-container rainbow-lake-container" id="rainbow-lake">
+    <!-- Deep fluid rainbow color morphing mesh -->
+    <div class="rainbow-lake-mesh"></div>
+
+    <!-- Liquid water currents & swirling caustic layers -->
+    <div class="lake-water-currents"></div>
+    <div class="lake-caustic-shimmer"></div>
+
+    <!-- Undulating fluid water wave layers -->
+    <div class="lake-waves-wrapper">
+      <svg class="lake-waves-svg" viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="lake-wave-path wave-1" d="M0,192L48,181.3C96,171,192,149,288,160C384,171,480,213,576,213.3C672,213,768,171,864,165.3C960,160,1056,192,1152,192C1248,192,1344,160,1392,144L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        <path class="lake-wave-path wave-2" d="M0,96L48,112C96,128,192,160,288,176C384,192,480,192,576,170.7C672,149,768,107,864,117.3C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        <path class="lake-wave-path wave-3" d="M0,224L48,208C96,192,192,160,288,165.3C384,171,480,213,576,218.7C672,224,768,192,864,181.3C960,171,1056,181,1152,176C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+      </svg>
+    </div>
+
+    <!-- Soft water ripple canvas for interactive lake ripples -->
+    <canvas id="lake-ripples-canvas"></canvas>
+
+    <!-- Optional looping background video with soft pink overlay & gradient fallback -->
+    <video id="bg-video" class="bg-video" autoplay loop muted playsinline style="display: none;">
+      <source src="assets/bg.mp4" type="video/mp4">
+      <source src="bg.mp4" type="video/mp4">
+    </video>
+
+    <!-- Translucent water surface sheen overlay -->
+    <div class="bg-overlay lake-overlay"></div>
+  </div>
+
+  <!-- Drifting Floating Emojis Layer -->
+  <div id="floating-emojis-container"></div>
+
+  <!-- Background Music Audio Element (Meena Bazaar - Keshav Tyohar) -->
+  <audio id="bg-audio" loop preload="auto">
+    <source src="assets/audio/Meena Bazaar - Keshav Tyohar Official Music Video.mp3" type="audio/mpeg">
+    <source src="assets/audio/song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ====================================================================
+       SECTION 0: OPENING GATE OVERLAY
+       ==================================================================== -->
+  <div id="opening-gate">
+    <!-- Top Pill -->
+    <div class="gate-pill">
+      <span>💌</span>
+      <span>Special Delivery For Potato</span>
+    </div>
+
+
+    <!-- Bottom Interactive Pill / Action -->
+    <div class="gate-bottom-actions">
+      <div class="gate-mascot-wrapper" title="Potato is ready to celebrate!">
+        <!-- Adorable Kawaii Potato SVG with Blinking Eyes & Party Hat -->
+        <svg width="105" height="105" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Potato Body -->
+          <ellipse cx="60" cy="68" rx="46" ry="40" fill="#e2ab76"/>
+          <ellipse cx="60" cy="68" rx="42" ry="36" fill="#f2c191"/>
+          <!-- Warm Potato Speckles -->
+          <circle cx="34" cy="56" r="2.5" fill="#ca8a04" opacity="0.45"/>
+          <circle cx="82" cy="78" r="3" fill="#ca8a04" opacity="0.45"/>
+          <circle cx="48" cy="88" r="2" fill="#ca8a04" opacity="0.45"/>
+          <!-- Rosy Blushing Cheeks -->
+          <ellipse cx="38" cy="74" rx="7" ry="4.5" fill="#ff8fa3" opacity="0.85"/>
+          <ellipse cx="82" cy="74" rx="7" ry="4.5" fill="#ff8fa3" opacity="0.85"/>
+          <!-- Kawaii Eyes with Shine -->
+          <circle cx="46" cy="64" r="5" fill="#4a2c11"/>
+          <circle cx="48" cy="62" r="1.8" fill="#ffffff"/>
+          <circle cx="74" cy="64" r="5" fill="#4a2c11"/>
+          <circle cx="76" cy="62" r="1.8" fill="#ffffff"/>
+          <!-- Cute Smiling Mouth -->
+          <path d="M 54 73 Q 60 79 66 73" stroke="#4a2c11" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <!-- Party Birthday Hat -->
+          <polygon points="60,10 44,42 76,42" fill="#ffb6c1"/>
+          <polygon points="60,10 52,42 68,42" fill="#fde047"/>
+          <circle cx="60" cy="10" r="5" fill="#facc15"/>
+          <!-- Cute Waving Hand -->
+          <ellipse cx="18" cy="72" rx="6" ry="4" fill="#e2ab76" transform="rotate(-20 18 72)"/>
+          <ellipse cx="102" cy="72" rx="6" ry="4" fill="#e2ab76" transform="rotate(20 102 72)"/>
+        </svg>
+      </div>
+
+      <button id="btn-open-gate" class="btn-open-gate">
+        <span>Tap to Open</span>
+        <span>🎀</span>
+      </button>
+
+      
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       TOP FLOATING NAV (Brand & Controls)
+       ==================================================================== -->
+  <header class="top-nav">
+    <a href="#" class="nav-brand" onclick="return false;">
+      <span class="brand-potato-icon">💖</span>
+      <span>Potato's 19th</span>
+    </a>
+
+    <div class="nav-actions">
+      <!-- Music Toggle Pill with Stop/Play Label & Visualizer -->
+      <button id="btn-music-toggle" class="nav-btn music-btn" title="Stop / Play Background Music" aria-label="Stop or Play Background Music">
+        <span class="vinyl-disc">💿</span>
+        <span class="music-wave-bars" aria-hidden="true">
+          <span class="m-bar"></span>
+          <span class="m-bar"></span>
+          <span class="m-bar"></span>
+        </span>
+        <span class="music-btn-label">Stop Music</span>
+      </button>
+
+      <!-- Favourite Color Glowing Neon Blue Toggle -->
+      <button id="btn-nav-favourite-color" class="nav-btn favourite-color-nav-btn" title="Change to your favourite color 💙" aria-label="Toggle favourite neon blue theme">
+        💙
+      </button>
+
+      <!-- Dark / Pastel Mode Toggle -->
+      <button id="btn-theme-toggle" class="nav-btn" title="Toggle Light/Dark Theme">
+        🌙
+      </button>
+
+      <!-- Settings / Customizer Drawer -->
+      <button id="btn-settings-toggle" class="nav-btn" title="Personalize / Settings">
+        ⚙️
+      </button>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       FLOATING QUICK-ACTION MUSIC CONTROLLER WIDGET (Collapsible)
+       ==================================================================== -->
+  <aside id="floating-music-bar" class="floating-music-bar is-collapsed" aria-label="Music Player Controls">
+    <button type="button" id="btn-fmb-disc" class="fmb-disc-wrapper" title="Music Player (Tap to expand/collapse)" aria-label="Toggle Music Player">
+      <span class="fmb-disc">💿</span>
+    </button>
+    <div class="fmb-body" id="fmb-body">
+      <div class="fmb-info">
+        <div class="fmb-title">Meena Bazaar 🎶</div>
+        <div class="fmb-status">
+          <span id="floating-music-status-text" class="fmb-status-text">Playing</span>
+          <span class="fmb-equalizer" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </span>
+        </div>
+      </div>
+      <button id="btn-floating-music-toggle" class="btn-floating-stop" title="Stop background music" aria-label="Stop background music">
+        <span id="floating-music-btn-icon" class="fmb-btn-icon">⏹️</span>
+        <span id="floating-music-btn-text" class="fmb-btn-text">Stop Music</span>
+      </button>
+      <button type="button" id="btn-fmb-collapse" class="btn-fmb-collapse" title="Collapse music player" aria-label="Collapse music player">
+        <span>❯</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ====================================================================
+       MAIN APPLICATION SECTIONS CONTAINER
+       ==================================================================== -->
+  <main class="app-container">
+
+    <!-- ================================================================
+         SECTION 1: HOME (Hero, Typewriter & Days Alive Counter)
+         ================================================================ -->
+    <section id="section-home" class="view-section active">
+      <div class="glass-card hero-card">
+        <div class="birthday-badge">
+          <span>✨</span>
+          <span id="home-badge-text">You're 19 now 🎉</span>
+          <span>✨</span>
+        </div>
+
+        <div class="hero-typewriter-container">
+          <h2 class="hero-title">
+            <span id="typewriter-text"></span><span class="typewriter-cursor">|</span>
+          </h2>
+        </div>
+
+        <div class="hero-star-card">
+          <p class="hero-star-revolution">
+            Looks like my favourite star has completed another revolution around the sun✨!!
+          </p>
+          <p class="hero-star-potato">
+            happy birthday my lovely potato 💖💛
+          </p>
+        </div>
+
+        <!-- Favourite Color Glow Action Button -->
+        <div class="favourite-color-action-box">
+          <button id="btn-favourite-color" class="btn-favourite-color" title="Switch text to your favourite glowing neon blue!">
+            <span class="favourite-btn-icon">💙</span>
+            <span id="favourite-btn-label" class="favourite-btn-label">Make it glow like u ✨</span>
+          </button>
+        </div>
+
+        <!-- Live "Days Since You Blessed This World" Counter -->
+        <div class="counter-box">
+          <h3 class="counter-title">Days Since You Blessed This World 🌍</h3>
+          <p class="counter-desc">Every single second has been brighter because you exist.</p>
+
+          <div class="counter-grid">
+            <div class="counter-item">
+              <span id="cnt-days" class="counter-num">6,940</span>
+              <span class="counter-label">Days</span>
+            </div>
+            <div class="counter-item">
+              <span id="cnt-hours" class="counter-num">14</span>
+              <span class="counter-label">Hours</span>
+            </div>
+            <div class="counter-item">
+              <span id="cnt-mins" class="counter-num">32</span>
+              <span class="counter-label">Mins</span>
+            </div>
+            <div class="counter-item">
+              <span id="cnt-secs" class="counter-num">50</span>
+              <span class="counter-label">Secs</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Start Journey Action Button -->
+        <div class="home-journey-action">
+          <button id="btn-start-journey" class="btn-next-step btn-journey-start" data-next="step-1">
+            <span>Next</span>
+            <span>➜</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STEP 1: QUESTION "Do you want to know why you are special? 🥺"
+         ================================================================ -->
+    <section id="step-1" class="view-section journey-step-section">
+      <div class="glass-card journey-card">
+        <div class="step-badge">Step 1 of 9 ✨</div>
+        <h2 class="journey-question">Do you want to know why you are special? 🥺</h2>
+        
+        <div id="step1-feedback" class="journey-feedback" aria-live="polite"></div>
+
+        <div id="step1-buttons-container" class="yes-no-row">
+          <button id="btn-step1-yes" class="btn-journey-choice btn-yes">
+            <span>Yes</span>
+            <span>💖</span>
+          </button>
+          <button id="btn-step1-no" class="btn-journey-choice btn-no">
+            <span>No</span>
+            <span>🙈</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STEP 2: PHOTO CARDS (6 Polaroid-Style Cards)
+         ================================================================ -->
+    <section id="step-2" class="view-section journey-step-section">
+      <div class="glass-card journey-card polaroid-stage-card">
+        <div class="step-badge">Step 2 of 9 📸</div>
+        <p id="polaroid-counter-text" class="polaroid-counter-text">Tap the photo for the next one (1 of 6)</p>
+
+        <div class="polaroid-deck-container" id="polaroid-deck" aria-label="Tap to view next photo card">
+          <!-- Dynamically populated from config.journey.step2.cards -->
+        </div>
+
+        <button id="btn-step2-next" class="btn-next-step journey-nav-btn" data-next="step-3" style="margin-top: 1.6rem;">
+          <span>Next</span>
+          <span>➜</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STEP 3: "Something special for you 💌" (8 Traits & Voice Notes)
+         ================================================================ -->
+    <section id="step-3" class="view-section journey-step-section">
+      <div class="glass-card journey-card traits-card">
+        <div class="step-badge">Step 3 of 9 💌</div>
+        <h2 class="journey-heading">Something special for you 💌</h2>
+        <p class="journey-subheading">Four special things that make you so uniquely YOU.</p>
+
+        <div id="traits-list" class="traits-list">
+          <!-- Dynamically populated from config.journey.step3.traits -->
+        </div>
+
+        <audio id="trait-audio-element" preload="auto"></audio>
+
+        <button id="btn-step3-next" class="btn-next-step journey-nav-btn" data-next="step-4">
+          <span>Next</span>
+          <span>➜</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STEP 4: QUESTION "Wanna know my favourite thing about you? 💭"
+         ================================================================ -->
+    <section id="step-4" class="view-section journey-step-section">
+      <div class="glass-card journey-card">
+        <div class="step-badge">Step 4 of 9 💭</div>
+        <h2 class="journey-question">Wanna know my favourite thing about you? 💭</h2>
+        <p class="journey-question-subtext">I know you already know, but still I want to make it evident.</p>
+
+        <div id="step4-feedback" class="journey-feedback" aria-live="polite"></div>
+
+        <!-- Deleting progress bar (hidden until 3rd No click) -->
+        <div id="step4-delete-box" class="delete-progress-container" style="display: none;">
+          <p id="step4-delete-text" class="delete-progress-text">Okay fine… the message is being deleted 💔</p>
+          <div class="delete-bar-track">
+            <div id="step4-delete-fill" class="delete-bar-fill"></div>
+          </div>
+        </div>
+
+        <div id="step4-buttons-container" class="yes-no-row">
+          <button id="btn-step4-yes" class="btn-journey-choice btn-yes">
+            <span>Yes</span>
+            <span>✨</span>
+          </button>
+          <button id="btn-step4-no" class="btn-journey-choice btn-no">
+            <span>No</span>
+            <span>😤</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STEP 5: FAVOURITE-THING VOICE NOTE (fav.mp3 with spinning disc)
+         ================================================================ -->
+    <section id="step-5" class="view-section journey-step-section">
+      <div class="glass-card journey-card audio-stage-card">
+        <div class="step-badge">Step 5 of 9 🎧</div>
+        <h2 class="journey-heading">My favourite thing about you 🎧</h2>
+        <p class="journey-subheading">Listen closely to this little voice note...</p>
+
+        <div class="spinning-disc-container">
+          <div id="spinning-disc-vinyl" class="spinning-disc-vinyl" title="Playing voice note">
+            <div class="disc-grooves"></div>
+            <div class="disc-center-label">
+              <span>💿</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="fav-audio-controls" class="fav-audio-controls">
+          <button id="btn-fav-play-pause" class="btn-fav-play-pause" aria-label="Play or pause voice note">
+            <span id="fav-play-icon">▶</span>
+            <span id="fav-play-text">Play Voice Note</span>
+          </button>
+        </div>
+
+        <audio id="fav-audio-element" preload="auto">
+          <source src="assets/audio/my favorite thing.mp3" type="audio/mpeg">
+        </audio>
+
+        <button id="btn-step5-next" class="btn-next-step journey-nav-btn" data-next="step-6">
+          <span>Next</span>
+          <span>➜</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STEP 6: MESSAGE FROM ME ("Your Cutuu wants to tell you something 💌")
+         ================================================================ -->
+    <section id="step-6" class="view-section journey-step-section">
+      <div class="glass-card journey-card letter-card">
+        <div class="step-badge">Step 6 of 9 💌</div>
+        <div class="message-big-icon">💌</div>
+        <h2 class="journey-heading">Your Cutuu wants to tell you something 💌</h2>
+        <p class="journey-subheading">A letter written straight from the heart...</p>
+
+        <!-- Scrollable Letter Image Container -->
+        <div class="message-scroll-wrapper">
+          <div class="message-scroll-hint">
+            <span>📜 Scroll to read full letter</span>
+            <span>👇</span>
+          </div>
+          <div class="message-image-scroll-box" id="message-scroll-box">
+            <img 
+              id="step6-message-img"
+              src="mesSAGE.jpeg" 
+              alt="Birthday letter for Potato" 
+              class="message-scroll-img"
+              loading="lazy"
+              onerror="if(!this.dataset.fallbackTried){this.dataset.fallbackTried='1'; this.src='assets/mesSAGE.jpeg';}"
+            />
+          </div>
+        </div>
+
+        <button id="btn-step6-next" class="btn-next-step journey-nav-btn" data-next="step-7">
+          <span>Next</span>
+          <span>➜</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STEP 7: GIFT QUESTION ("Would you accept my gift? 🥹" Runaway No)
+         ================================================================ -->
+    <section id="step-7" class="view-section journey-step-section">
+      <div class="glass-card journey-card runaway-stage-card" id="runaway-card">
+        <div class="step-badge">Step 7 of 9 🎁</div>
+        <h2 class="journey-question">Would you accept my gift? 🥹</h2>
+        <p class="journey-question-subtext">Please, it's a request.</p>
+
+        <div id="step7-feedback" class="journey-feedback" aria-live="polite"></div>
+
+        <div class="runaway-buttons-wrapper" id="runaway-area">
+          <button id="btn-step7-yes" class="btn-journey-choice btn-yes">
+            <span>Yes</span>
+            <span>💖</span>
+          </button>
+          <button id="btn-step7-no" class="btn-journey-choice btn-no runaway-btn">
+            <span>No</span>
+            <span>🙈</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STEP 8: CHOOSE A BOX (3 🎁 boxes with reveal & confetti)
+         ================================================================ -->
+    <section id="step-8" class="view-section journey-step-section">
+      <div class="glass-card journey-card boxes-stage-card">
+        <div class="step-badge">Step 8 of 9 🎀</div>
+        <h2 class="journey-heading">Choose your gifts 🎀</h2>
+        <p class="journey-subheading">Choose any <strong>2 gifts</strong> you love... or choose them all! ✨</p>
+
+        <!-- Top Actions Bar: Selection Counter & "Choose All" Button -->
+        <div class="gift-actions-top-row">
+          <div class="gift-counter-badge" id="gift-counter-badge">
+            <span class="gcb-icon">🎁</span>
+            <span id="gift-counter-text">Selected: 0 of 2 gifts</span>
+          </div>
+          <button type="button" id="btn-choose-all-gifts" class="btn-choose-all-action">
+            <span>✨ See All Gifts & Choose All 🎁</span>
+          </button>
+        </div>
+
+        <div class="mystery-boxes-row" id="mystery-boxes-row">
+          <button class="mystery-box-item" data-box="1" aria-label="Mystery Box 1">
+            <span class="box-check-indicator">✓</span>
+            <span class="box-icon">🎁</span>
+            <span class="box-label">Box 1</span>
+          </button>
+          <button class="mystery-box-item" data-box="2" aria-label="Mystery Box 2">
+            <span class="box-check-indicator">✓</span>
+            <span class="box-icon">🎁</span>
+            <span class="box-label">Box 2</span>
+          </button>
+          <button class="mystery-box-item" data-box="3" aria-label="Mystery Box 3">
+            <span class="box-check-indicator">✓</span>
+            <span class="box-icon">🎁</span>
+            <span class="box-label">Box 3</span>
+          </button>
+          <button class="mystery-box-item" data-box="4" aria-label="Mystery Box 4">
+            <span class="box-check-indicator">✓</span>
+            <span class="box-icon">🎁</span>
+            <span class="box-label">Box 4</span>
+          </button>
+        </div>
+
+        <!-- Revealed Gifts Container (Supports 1, 2, or All Gifts dynamically) -->
+        <div id="gift-reveal-card" class="gift-reveal-card" style="display: none;">
+          <div id="gift-reveal-items-container" class="gift-reveal-items-container"></div>
+
+          <button id="btn-step8-next" class="btn-next-step journey-nav-btn" data-next="step-9" style="margin-top: 1.5rem;">
+            <span>Proceed with Selected Gifts</span>
+            <span>➜</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STEP 9: DELIVERY DETAILS FORM ("Where should I send it? 📦")
+         ================================================================ -->
+    <section id="step-9" class="view-section journey-step-section">
+      <div class="glass-card journey-card form-stage-card">
+        <div class="step-badge">Step 9 of 9 📦</div>
+        
+        <div id="delivery-form-container">
+          <h2 class="journey-heading">Where should I send it? 📦</h2>
+          
+          <!-- UPFRONT FLIPKART PRIVACY & DELIVERY NOTICE -->
+          <div class="upfront-privacy-badge">
+            <span class="upfront-privacy-icon">🔒</span>
+            <p id="upfront-privacy-text" class="upfront-privacy-text">
+              Your phone and address details will directly go to Flipkart and the order will be delivered to the entered address. No one else will be able to see it. You can also choose the sender name on the package yourself, so no one will know who sent it! 📦✨
+            </p>
+          </div>
+
+          <form id="delivery-form" class="delivery-form" novalidate onsubmit="return false;">
+            <div class="form-group">
+              <label for="input-recipient-name" class="form-label">
+                <span>Your Name</span>
+                <span class="required-star">*</span>
+              </label>
+              <input type="text" id="input-recipient-name" class="form-input" placeholder="e.g. Potato / Your Name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="input-recipient-phone" class="form-label">
+                <span>Phone Number</span>
+                <span class="required-star">*</span>
+                <span class="field-hint">(Flipkart delivery partner will call this)</span>
+              </label>
+              <input type="tel" id="input-recipient-phone" class="form-input" placeholder="10-digit mobile number" maxlength="10" required>
+            </div>
+
+            <div class="form-group">
+              <label for="input-recipient-address" class="form-label">
+                <span>Full Address with Pincode</span>
+                <span class="required-star">*</span>
+              </label>
+              <textarea id="input-recipient-address" class="form-textarea" rows="3" placeholder="House/Flat No., Street, Landmark, City, State & Pincode" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="input-parcel-sender" class="form-label">
+                <span>Name to show as sender on the parcel</span>
+                <span class="optional-tag">(optional)</span>
+              </label>
+              <input type="text" id="input-parcel-sender" class="form-input" placeholder="e.g. Secret Admirer / Friend / Cutuu">
+            </div>
+
+            <!-- Error Banner -->
+            <div id="delivery-error-msg" class="delivery-error-msg" style="display: none;" role="alert"></div>
+
+            <div class="form-buttons-row">
+              <button type="button" id="btn-send-whatsapp" class="btn-delivery-action btn-send-wa">
+                <span>Send details</span>
+                <span>💛</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Thank You Screen -->
+        <div id="delivery-thank-you" class="delivery-thank-you" style="display: none;">
+          <div class="thank-you-mascot">💖✨🎉</div>
+          <h2 class="thank-you-title">Thank you, Potato! 💖✨</h2>
+          <p class="thank-you-msg">
+            Thank you and a very happy and joyful birthday to you, my lovely Potato! 💖✨🎂
+          </p>
+          <div class="thank-you-actions">
+            <button id="btn-replay-from-thankyou" class="btn-next-step">
+              <span>Replay the Journey 🔄</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       INTERACTIVE POTATO MASCOT COMPANION (Bottom Right)
+       ==================================================================== -->
+  <div id="mascot-companion" class="mascot-companion-fixed" title="Tap me, Potato!">
+    <div id="mascot-speech-bubble" class="mascot-speech-bubble">Boop! 💖</div>
+    <div class="mascot-svg-wrapper">
+      <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Potato Body -->
+        <ellipse cx="50" cy="55" rx="38" ry="32" fill="#e2ab76"/>
+        <ellipse cx="50" cy="55" rx="35" ry="29" fill="#f2c191"/>
+        <!-- Eyes -->
+        <circle cx="40" cy="52" r="4.2" fill="#4a2c11"/>
+        <circle cx="41.5" cy="50.5" r="1.5" fill="#ffffff"/>
+        <circle cx="60" cy="52" r="4.2" fill="#4a2c11"/>
+        <circle cx="61.5" cy="50.5" r="1.5" fill="#ffffff"/>
+        <!-- Cheeks -->
+        <ellipse cx="33" cy="59" rx="5" ry="3" fill="#ff8fa3" opacity="0.85"/>
+        <ellipse cx="67" cy="59" rx="5" ry="3" fill="#ff8fa3" opacity="0.85"/>
+        <!-- Smile -->
+        <path d="M 46 59 Q 50 63 54 59" stroke="#4a2c11" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <!-- Little Hat -->
+        <polygon points="50,15 38,36 62,36" fill="#f472b6"/>
+        <circle cx="50" cy="15" r="3.5" fill="#fde047"/>
+      </svg>
+    </div>
+  </div>
+
+
+
+
+  <!-- ====================================================================
+       EASTER EGG MODAL (Triggered on 5th Potato Mascot Tap)
+       ==================================================================== -->
+  <div id="easter-egg-modal">
+    <div class="easter-egg-box">
+      <div class="easter-egg-icon">💖👑✨</div>
+      <h3 class="easter-egg-title">You found it, Potato! 💖💛</h3>
+      <p class="easter-egg-desc">
+        You discovered the secret easter egg! You are officially crowned the most precious, sweetest, and most wonderful potato in the entire cosmos. Keep being incredible!
+      </p>
+      <button id="btn-close-easter" class="btn-close-easter">Aww, thank you! 💖</button>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       CUSTOMIZE SETTINGS DRAWER (To live-edit personal copy on the fly)
+       ==================================================================== -->
+  <div id="customizer-drawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title">Personalize Website ⚙️</h3>
+      <button id="btn-close-drawer" class="drawer-close-btn">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.2rem;">
+        You can test different names or dates live. Changes are saved instantly!
+      </p>
+
+      <div class="custom-field-group">
+        <label class="custom-field-label">Her Real Name / Callout</label>
+        <input type="text" id="custom-name" class="custom-field-input" placeholder="e.g. Potato / Maya">
+      </div>
+
+      <div class="custom-field-group">
+        <label class="custom-field-label">Her Nickname</label>
+        <input type="text" id="custom-nickname" class="custom-field-input" placeholder="e.g. Potato 💖">
+      </div>
+
+      <div class="custom-field-group">
+        <label class="custom-field-label">From (Your Name)</label>
+        <input type="text" id="custom-sender" class="custom-field-input" placeholder="e.g. Himanshu">
+      </div>
+
+      <div class="custom-field-group">
+        <label class="custom-field-label">Her Birthdate (YYYY-MM-DD)</label>
+        <input type="date" id="custom-birth" class="custom-field-input">
+      </div>
+
+      <button id="btn-save-custom" class="btn-save-custom">Save & Preview 💖</button>
+    </div>
+  </div>
+
+  <!-- Configuration and Logic Scripts -->
+  <script src="config.js?v=v4_journey"></script>
+  <script src="script.js?v=v4_journey"></script>
+</body>
+</html>

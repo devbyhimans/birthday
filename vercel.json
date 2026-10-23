@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/delivery", "destination": "/api/delivery.js" },
+    { "source": "/api/deliveries", "destination": "/api/delivery.js" },
+    { "source": "/api/health", "destination": "/api/delivery.js" }
+  ]
+}
