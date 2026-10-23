@@ -1576,7 +1576,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ------------------------------------------------------------------
   // STEP 9: Delivery Details Form & WhatsApp Send
   // ------------------------------------------------------------------
-  const btnSendWhatsApp = document.getElementById('btn-send-whatsapp');
+  const btnSendDetails = document.getElementById('btn-send-details') || document.getElementById('btn-send-whatsapp');
   const btnCopyDetails = document.getElementById('btn-copy-details');
   const deliveryErrorMsg = document.getElementById('delivery-error-msg');
   const deliveryFormContainer = document.getElementById('delivery-form-container');
@@ -1658,8 +1658,8 @@ document.addEventListener('DOMContentLoaded', () => {
     return null;
   }
 
-  if (btnSendWhatsApp) {
-    btnSendWhatsApp.addEventListener('click', () => {
+  if (btnSendDetails) {
+    btnSendDetails.addEventListener('click', async () => {
       const data = getDeliveryFormData();
       const error = validateDeliveryForm(data);
 
@@ -1673,7 +1673,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (deliveryErrorMsg) deliveryErrorMsg.style.display = 'none';
 
-      // Determine selected gifts details for MongoDB and WhatsApp
+      // Visual feedback on button
+      btnSendDetails.disabled = true;
+      btnSendDetails.innerHTML = '<span>Saving...</span> <span>✨</span>';
+
+      // Determine selected gifts details for MongoDB
       const boxConfigList = config.journey?.step8?.boxes || [];
       const chosenGiftsList = [];
       let giftSummary = 'Birthday Surprise Gift 🎁';
@@ -1712,7 +1716,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Asynchronously save to MongoDB database "potato"
-      saveDeliveryToMongoDB({
+      await saveDeliveryToMongoDB({
         name: data.name,
         phone: data.phone,
         address: data.address,
@@ -1724,18 +1728,12 @@ document.addEventListener('DOMContentLoaded', () => {
         totalGiftsChosen: chosenGiftsList.length
       });
 
-      const waNumber = config.sender?.whatsappNumber || '919876543210';
-      const msg = buildWhatsAppMessage(data);
-      const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
-
-      window.open(waUrl, '_blank');
-
-      // Show thank you screen
+      // No WhatsApp redirection! Directly show thank you celebration screen
       if (deliveryFormContainer) deliveryFormContainer.style.display = 'none';
       if (deliveryThankYou) deliveryThankYou.style.display = 'block';
 
       // Big confetti celebration
-      fireConfetti({ particleCount: 140, spread: 100, origin: { y: 0.5 } });
+      fireConfetti({ particleCount: 150, spread: 100, origin: { y: 0.5 } });
     });
   }
 

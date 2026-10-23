@@ -3872,15 +3872,15 @@ body.gate-active #bottom-dock {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.btn-send-wa {
-  background: linear-gradient(135deg, #25d366, #128c7e);
+.btn-send-delivery, .btn-send-wa {
+  background: linear-gradient(135deg, #ff758c, #ff9f43);
   color: #fff;
-  box-shadow: 0 8px 22px rgba(37, 211, 102, 0.45);
+  box-shadow: 0 8px 22px rgba(255, 117, 140, 0.45);
 }
 
-.btn-send-wa:hover {
+.btn-send-delivery:hover, .btn-send-wa:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.6);
+  box-shadow: 0 12px 28px rgba(255, 117, 140, 0.6);
 }
 
 .btn-copy-details {
